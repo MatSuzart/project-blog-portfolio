@@ -117,7 +117,7 @@ Em um ano, você terá **12 experiências literárias diferentes**, cada uma amp
 
   Ter um projeto pessoal como esse é fundamental — ele te desafia, te mantém motivado e faz com que o aprendizado tenha propósito.
 
-  🔗 **[Acesse o projeto de flashcards no GitHub](https://github.com/MatSuzart/front-end-note)**
+  🔗 **[Acesse o projeto de flashcards no GitHub](https://github.com/matsuzart/spellbook)**
 
   ## Livros Recomendados
 

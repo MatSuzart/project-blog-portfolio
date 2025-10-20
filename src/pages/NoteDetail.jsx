@@ -23,7 +23,7 @@ export default function NoteDetail() {
   const fetchNote = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:3000/api/notes' );
+      const response = await fetch('http://localhost:3000/api/notes');
       
       if (!response.ok) {
         throw new Error('Failed to fetch note');
@@ -159,16 +159,6 @@ export default function NoteDetail() {
                   {children}
                 </strong>
               ),
-              a: ({ href, children }) => (
-                <a 
-                  href={href} 
-                  className="text-accent underline hover:text-magic-light transition-colors duration-300"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {children}
-                </a>
-              ),
               ul: ({ children }) => (
                 <ul className="list-disc list-inside space-y-2 mb-4 text-gray-300">
                   {children}
@@ -187,14 +177,13 @@ export default function NoteDetail() {
               hr: () => (
                 <hr className="my-8 border-t-2 border-accent/30" />
               ),
-              img: ({ node, ...props }) => (
+              img: ({...props }) => (
                 <img {...props} className="max-w-full h-auto rounded-lg shadow-lg my-4" />
               ),
-              // Custom component for YouTube videos
-              // This assumes a specific markdown format like: ![youtube](VIDEO_ID)
-              // Or a simple link: [youtube](VIDEO_ID)
               a: ({ href, children }) => {
-                if (href && (href.includes('youtube.com/watch?v=') || href.includes('youtu.be/'))) {
+                const isYouTube = href && (href.includes('youtube.com/watch?v=') || href.includes('youtu.be/'));
+                
+                if (isYouTube) {
                   const videoId = href.includes('youtube.com/watch?v=') ? href.split('v=')[1] : href.split('/').pop();
                   return (
                     <div className="relative w-full h-0 pb-[56.25%] my-4">
@@ -207,8 +196,9 @@ export default function NoteDetail() {
                         title="YouTube video player"
                       ></iframe>
                     </div>
-                   );
+                  );
                 }
+                
                 return (
                   <a 
                     href={href} 
