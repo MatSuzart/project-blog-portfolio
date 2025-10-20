@@ -1,0 +1,472 @@
+/* Importar a fonte pixel art do Google Fonts - DEVE vir primeiro */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;700&display=swap');
+
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+}
+
+:root {
+  --radius: 0.5rem;
+  
+  /* Paleta Medieval Pixel Art */
+  --background-dark: #0F0F1E;
+  --primary-purple: #6A0572;
+  --accent-gold: #FFD700;
+  --text-light: #E0E0E0;
+  --text-dark: #333333;
+  --border-gray: #444444;
+  --magic-light: #00FFFF;
+  --secondary-green: #00C896;
+  --error-red: #FF4444;
+  
+  /* Mapeamento para o tema do Tailwind */
+  --background: #0F0F1E;
+  --foreground: #E0E0E0;
+  --card: #1A1A2E;
+  --card-foreground: #E0E0E0;
+  --popover: #1A1A2E;
+  --popover-foreground: #E0E0E0;
+  --primary: #6A0572;
+  --primary-foreground: #E0E0E0;
+  --secondary: #FFD700;
+  --secondary-foreground: #0F0F1E;
+  --muted: #444444;
+  --muted-foreground: #E0E0E0;
+  --accent: #FFD700;
+  --accent-foreground: #0F0F1E;
+  --destructive: #FF4444;
+  --border: #FFD700;
+  --input: #444444;
+  --ring: #FFD700;
+  --chart-1: #6A0572;
+  --chart-2: #FFD700;
+  --chart-3: #00C896;
+  --chart-4: #00FFFF;
+  --chart-5: #FF4444;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Press Start 2P', cursive;
+    color: var(--accent-gold);
+    line-height: 1.4;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+  }
+  
+  h2 {
+    font-size: 1.25rem;
+  }
+  
+  h3 {
+    font-size: 1rem;
+  }
+}
+
+/* Estilos personalizados para o layout medieval pixel art */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  background-image: url('./assets/castle_pixel.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+}
+
+.app-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(15, 15, 30, 0.95) 0%, rgba(26, 26, 46, 0.9) 100%);
+  z-index: 0;
+}
+
+/* Animação de partículas de fundo */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-20px) translateX(10px);
+    opacity: 0.6;
+  }
+}
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 280px;
+  background: linear-gradient(180deg, rgba(15, 15, 30, 0.98) 0%, rgba(26, 26, 46, 0.95) 100%);
+  border-right: 2px solid var(--accent-gold);
+  box-shadow: 4px 0 20px rgba(255, 215, 0, 0.15);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1rem;
+  backdrop-filter: blur(10px);
+}
+
+.prompt-container {
+  margin-left: 280px;
+  padding: 2rem;
+  width: calc(100% - 280px);
+  z-index: 1;
+  position: relative;
+}
+
+.prompt-box {
+  background: rgba(15, 15, 30, 0.95);
+  border: 2px solid var(--accent-gold);
+  border-radius: 0.5rem;
+  padding: 3rem;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.2), inset 0 0 30px rgba(255, 215, 0, 0.05);
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  backdrop-filter: blur(10px);
+}
+
+/* Efeito de brilho nos cantos */
+.prompt-box::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, transparent 30%, rgba(255, 215, 0, 0.1) 50%, transparent 70%);
+  border-radius: 0.5rem;
+  z-index: -1;
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Efeito de grid pixelado no fundo */
+.prompt-box::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(rgba(255, 215, 0, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 215, 0, 0.02) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  z-index: -1;
+  border-radius: 0.5rem;
+}
+
+/* Botões estilizados */
+.pixel-button {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.65rem;
+  padding: 0.875rem 1.75rem;
+  background: var(--accent-gold);
+  color: var(--background-dark);
+  border: 2px solid var(--accent-gold);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  border-radius: 0.25rem;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.pixel-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.pixel-button:hover::before {
+  left: 100%;
+}
+
+.pixel-button:hover {
+  background: transparent;
+  color: var(--accent-gold);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5), inset 0 0 20px rgba(255, 215, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.pixel-button:active {
+  transform: translateY(0);
+}
+
+/* Links de navegação */
+.nav-link {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.65rem;
+  color: var(--text-light);
+  text-decoration: none;
+  padding: 1rem 1.25rem;
+  display: block;
+  transition: all 0.3s ease;
+  border-left: 3px solid transparent;
+  margin-bottom: 0.5rem;
+  border-radius: 0 0.25rem 0.25rem 0;
+  position: relative;
+}
+
+.nav-link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: rgba(255, 215, 0, 0.1);
+  transition: width 0.3s ease;
+  border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.nav-link:hover::before,
+.nav-link.active::before {
+  width: 100%;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--accent-gold);
+  border-left-color: var(--accent-gold);
+  transform: translateX(5px);
+}
+
+/* Estilos para conteúdo markdown */
+.prose {
+  color: var(--text-light);
+  max-width: none;
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+  color: var(--accent-gold);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.prose p {
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+}
+
+.prose strong {
+  color: var(--accent-gold);
+  font-weight: 700;
+}
+
+.prose a {
+  color: var(--accent-gold);
+  text-decoration: underline;
+  transition: all 0.3s ease;
+}
+
+.prose a:hover {
+  color: var(--magic-light);
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.prose ul, .prose ol {
+  margin-bottom: 1.5rem;
+  padding-left: 2rem;
+}
+
+.prose li {
+  margin-bottom: 0.5rem;
+}
+
+.prose code {
+  background: rgba(255, 215, 0, 0.1);
+  color: var(--accent-gold);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+.prose pre {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--accent-gold);
+}
+
+.prose pre code {
+  background: none;
+  padding: 0;
+}
+
+.prose blockquote {
+  border-left: 4px solid var(--accent-gold);
+  padding-left: 1rem;
+  margin-left: 0;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+  color: var(--text-light);
+}
+
+.prose hr {
+  border: none;
+  border-top: 2px solid var(--accent-gold);
+  margin: 2rem 0;
+  opacity: 0.3;
+}
+
+/* Animação de entrada suave */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-gold);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--magic-light);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    border-right: none;
+    border-bottom: 2px solid var(--accent-gold);
+  }
+  
+  .prompt-container {
+    margin-left: 0;
+    width: 100%;
+    padding: 1rem;
+  }
+  
+  .prompt-box {
+    padding: 1.5rem;
+  }
+  
+  h1 {
+    font-size: 1.25rem;
+  }
+  
+  h2 {
+    font-size: 1rem;
+  }
+  
+  .pixel-button {
+    font-size: 0.6rem;
+    padding: 0.75rem 1.25rem;
+  }
+  
+  .nav-link {
+    font-size: 0.6rem;
+    padding: 0.75rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .prompt-box {
+    padding: 1rem;
+  }
+  
+  h1 {
+    font-size: 1rem;
+  }
+  
+  .pixel-button {
+    font-size: 0.55rem;
+    padding: 0.625rem 1rem;
+  }
+}
+
