@@ -2,10 +2,10 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Home, User, Briefcase, BookOpen, Mail, Globe } from 'lucide-react';
-//import logo from '../assets/wizard_hat_logo_inverted_magic.png';
+//import logo from '../assets/wizard_hat_logo_inverted_magic';
 import logo from '../assets/logo_home.png';
 
-export default function Sidebar() {
+export default function Sidebar({ isSidebarOpen, toggleSidebar }) {
   const location = useLocation();
   const { t, i18n } = useTranslation();
 
@@ -22,7 +22,7 @@ export default function Sidebar() {
   };
 
   return (
-    <div className="sidebar">
+    <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
       <div className="flex justify-center mb-8">
         <img src={logo} alt="Logo" className="w-24 h-24 object-contain hover:scale-110 transition-transform duration-300" />
       </div>
@@ -32,7 +32,12 @@ export default function Sidebar() {
           const Icon = item.icon;
           const isActive = location.pathname === item.path;
           return (
-            <Link key={item.path} to={item.path} className={`nav-link ${isActive ? 'active' : ''}`}>
+            <Link 
+              key={item.path} 
+              to={item.path} 
+              className={`nav-link ${isActive ? 'active' : ''}`}
+              onClick={toggleSidebar} // Close sidebar on link click for mobile
+            >
               <div className="flex items-center gap-3">
                 <Icon size={16} />
                 <span>{item.label}</span>
@@ -56,4 +61,3 @@ export default function Sidebar() {
     </div>
   );
 }
-

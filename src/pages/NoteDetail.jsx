@@ -1,6 +1,8 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useLocation } from 'react-router-dom';
 import { ArrowLeft, Calendar, Tag, Clock } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { useEffect, useState } from 'react';
 
 export default function NoteDetail() {
@@ -9,18 +11,19 @@ export default function NoteDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
-  
+  const location = useLocation();
+
   useEffect(() => {
     setIsVisible(true);
     window.scrollTo(0, 0);
     fetchNote();
-  }, [slug]);
+  }, [slug, location]);
 
   // Função para buscar uma nota específica da API
   const fetchNote = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:3000/api/notes');
+      const response = await fetch('http://localhost:3000/api/notes' );
       
       if (!response.ok) {
         throw new Error('Failed to fetch note');
@@ -86,7 +89,7 @@ export default function NoteDetail() {
       <div className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-5'}`}>
         <Link 
           to="/notes" 
-          className="inline-flex items-center gap-2 text-accent hover:text-accent/80 transition-colors duration-300 group"
+          className="inline-flex items-center gap-2 text-accent hover:text-magic-light transition-colors duration-300 group"
         >
           <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform duration-300" />
           <span className="font-mono text-sm">Back to Notes</span>
@@ -184,16 +187,50 @@ export default function NoteDetail() {
               hr: () => (
                 <hr className="my-8 border-t-2 border-accent/30" />
               ),
-              code: ({ inline, children }) => {
-                if (inline) {
+              img: ({ node, ...props }) => (
+                <img {...props} className="max-w-full h-auto rounded-lg shadow-lg my-4" />
+              ),
+              // Custom component for YouTube videos
+              // This assumes a specific markdown format like: ![youtube](VIDEO_ID)
+              // Or a simple link: [youtube](VIDEO_ID)
+              a: ({ href, children }) => {
+                if (href && (href.includes('youtube.com/watch?v=') || href.includes('youtu.be/'))) {
+                  const videoId = href.includes('youtube.com/watch?v=') ? href.split('v=')[1] : href.split('/').pop();
                   return (
-                    <code className="bg-accent/10 text-accent px-2 py-1 rounded text-sm font-mono">
-                      {children}
-                    </code>
+                    <div className="relative w-full h-0 pb-[56.25%] my-4">
+                      <iframe
+                        className="absolute top-0 left-0 w-full h-full rounded-lg shadow-lg"
+                        src={`https://www.youtube.com/embed/${videoId}`}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        title="YouTube video player"
+                      ></iframe>
+                    </div>
+                   );
+                }
+                return (
+                  <a 
+                    href={href} 
+                    className="text-accent underline hover:text-magic-light transition-colors duration-300"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {children}
+                  </a>
+                );
+              },
+              code: ({ inline, className, children }) => {
+                const match = /language-(\w+)/.exec(className || '');
+                if (!inline && match) {
+                  return (
+                    <SyntaxHighlighter style={dracula} language={match[1]} PreTag="div">
+                      {String(children).replace(/\n$/, '')}
+                    </SyntaxHighlighter>
                   );
                 }
                 return (
-                  <code className="block bg-black/50 p-4 rounded border border-accent/30 overflow-x-auto text-sm font-mono">
+                  <code className="bg-accent/10 text-accent px-2 py-1 rounded text-sm font-mono">
                     {children}
                   </code>
                 );
@@ -224,4 +261,3 @@ export default function NoteDetail() {
     </div>
   );
 }
-

@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Github, Instagram, Mail } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import avatar from '../assets/avatar.png';
+import avatar from '../assets/avatar.jpg';
 
 export default function About() {
   const { t } = useTranslation();
@@ -29,7 +29,7 @@ export default function About() {
               <img 
                 src={avatar} 
                 alt="Matheus Suzart Avatar" 
-                className="w-48 h-48 rounded-lg border-2 border-accent/50 group-hover:border-accent transition-all duration-300 group-hover:scale-105"
+                className="w-48 h-48 rounded-full object-cover border-2 border-accent/50 group-hover:border-accent transition-all duration-300 group-hover:scale-105"
               />
               <div className="absolute -bottom-2 -right-2 w-6 h-6 bg-accent rounded-full animate-pulse"></div>
             </div>
@@ -117,4 +117,3 @@ export default function About() {
     </div>
   );
 }
-
