@@ -7,7 +7,7 @@ export const notes = [
   id: 7,
   title: '12 Livros para Desenvolver o Gosto pela Leitura',
   slug: '12-livros-gosto-leitura',
-  date: '2025-09-09',
+  date: '2019-01-09',
   category: 'literatura',
   excerpt: 'Uma lista de 12 livros clássicos e universais que ajudam a desenvolver o gosto pela leitura, enriquecer o repertório cultural e compreender melhor a natureza das coisas.',
   content: `
@@ -89,7 +89,7 @@ Em um ano, você terá **12 experiências literárias diferentes**, cada uma amp
     id: 2,
     title: 'Programador Pragmático: O Valor de Aprender e Ter um Projeto de Vida',
     slug: 'programador-pragmatico',
-    date: '2025-10-20',
+    date: '2025-01-12',
     category: 'desenvolvimento',
     excerpt: 'Reflexões sobre aprendizado contínuo, propósito e a importância de ter um projeto que te estimule a evoluir como desenvolvedor e como pessoa.',
     content: `
