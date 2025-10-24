@@ -160,28 +160,17 @@
   transition: transform 0.3s ease-in-out;
 }
 
-.sidebar.hidden-mobile {
-  transform: translateX(-100%);
-}
-
+/* Esconder sidebar por padrão em mobile */
 @media (max-width: 768px) {
   .sidebar {
-    width: 250px;
-    position: fixed;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    z-index: 50;
+    width: 250px; /* Largura da sidebar em mobile */
+    z-index: 50; /* Garantir que fique acima do conteúdo */
     transform: translateX(-100%);
     border-right: 2px solid var(--accent-gold);
   }
 
   .sidebar.open {
     transform: translateX(0%);
-  }
-
-  .app-container.sidebar-open .prompt-container {
-    margin-left: 250px;
   }
 
   .overlay {
@@ -200,23 +189,32 @@
   }
 }
 
-
+/* Estilos para o container principal de conteúdo */
 .prompt-container {
-  margin-left: 280px;
   padding: 2rem;
-  width: calc(100% - 280px);
+  width: 100%; /* Por padrão, ocupa 100% */
   z-index: 1;
   position: relative;
   transition: margin-left 0.3s ease-in-out;
 }
 
+/* Aplica a margem e largura correta apenas em telas maiores que 768px (desktop) */
+@media (min-width: 769px) {
+  .prompt-container {
+    margin-left: 280px; /* Espaço para a sidebar em desktop */
+    width: calc(100% - 280px);
+  }
+}
+
+/* Ajustes para mobile */
 @media (max-width: 768px) {
   .prompt-container {
-    margin-left: 0;
+    margin-left: 0; /* Sem margem em mobile */
     width: 100%;
     padding: 1rem;
   }
 }
+
 
 
 .prompt-box {
@@ -470,19 +468,8 @@
 
 /* Responsividade */
 @media (max-width: 768px) {
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-    border-right: none;
-    border-bottom: 2px solid var(--accent-gold);
-  }
-  
-  .prompt-container {
-    margin-left: 0;
-    width: 100%;
-    padding: 1rem;
-  }
+  /* O CSS da sidebar e prompt-container já foi ajustado acima.
+     Mantendo apenas os ajustes de padding e fontes para mobile */
   
   .prompt-box {
     padding: 1.5rem;

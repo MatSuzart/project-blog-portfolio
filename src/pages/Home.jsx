@@ -13,7 +13,6 @@ export default function Home() {
 
   return (
     <div className="space-y-12">
-      {/* Hero Section */}
       <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="mb-6">
           <div className="text-accent text-sm mb-2 font-mono">$ whoami</div>
@@ -25,9 +24,8 @@ export default function Home() {
         </p>
       </div>
 
-      {/* Stats Section */}
       <div className={`transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           <div className="group bg-gradient-to-br from-primary/30 to-primary/10 p-6 rounded-lg border-2 border-accent/50 hover:border-accent transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 hover:-translate-y-1">
             <TrendingUp className="w-10 h-10 text-accent mb-3 group-hover:scale-110 transition-transform duration-300" />
             <div className="text-4xl font-bold text-accent mb-2">5+</div>
@@ -46,10 +44,9 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Interests Section */}
       <div className={`transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="text-accent text-sm mb-4 font-mono">$ cat interests.txt</div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           <div className="flex items-start gap-3 p-4 bg-background/50 border border-accent/30 rounded hover:border-accent/60 transition-colors duration-300">
             <Code className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
             <div>
@@ -74,7 +71,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* CTA Section */}
       <div className={`transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="text-accent text-sm mb-4 font-mono">$ explore --all</div>
         <div className="flex flex-wrap gap-4">
@@ -102,7 +98,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Terminal Effect */}
       <div className={`transition-all duration-1000 delay-900 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="mt-12 p-4 bg-black/40 border border-accent/30 rounded font-mono text-sm">
           <div className="text-accent mb-2">$ echo "Welcome to my digital realm"</div>

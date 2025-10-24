@@ -13,17 +13,14 @@ export default function About() {
 
   return (
     <div className="space-y-8">
-      {/* Header */}
       <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="text-accent text-sm mb-2 font-mono">$ cat about.md</div>
         <h1 className="text-3xl mb-2">{t('about.title')}</h1>
         <div className="h-1 w-20 bg-accent mb-4"></div>
       </div>
 
-      {/* Main Content */}
       <div className={`transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-        <div className="grid md:grid-cols-[200px_1fr] gap-8 items-start">
-          {/* Avatar */}
+        <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-8 items-start">
           <div className="flex justify-center md:justify-start">
             <div className="relative group">
               <img 
@@ -35,9 +32,7 @@ export default function About() {
             </div>
           </div>
 
-          {/* Bio */}
           <div className="space-y-6">
-            {/* Introduction */}
             <div className="prose prose-invert max-w-none">
               <p className="text-lg text-gray-300 leading-relaxed">
                 {t('about.greeting')} <span className="text-accent font-bold">Matheus Suzart</span>. 
@@ -53,12 +48,10 @@ export default function About() {
               </p>
             </div>
 
-            {/* Quote */}
             <blockquote className="border-l-4 border-accent pl-4 py-2 bg-accent/5 rounded-r italic text-gray-400">
               "{t('about.quote')}"
             </blockquote>
 
-            {/* Contact Links */}
             <div className="flex flex-wrap gap-4 pt-4">
               <a
                 href="https://github.com/matsuzart"
@@ -92,9 +85,8 @@ export default function About() {
         </div>
       </div>
 
-      {/* Skills/Interests */}
       <div className={`transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-        <div className="grid md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           <div className="bg-gradient-to-br from-accent/10 to-transparent border border-accent/30 rounded-lg p-4 hover:border-accent transition-all duration-300">
             <div className="text-accent text-2xl mb-2">💻</div>
             <h3 className="text-lg font-bold text-accent mb-2">{t('about.developer')}</h3>

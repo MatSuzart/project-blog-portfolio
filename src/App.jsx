@@ -2,13 +2,14 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import { useState } from 'react';
-import { Menu } from 'lucide-react';
+import { Menu, Globe } from 'lucide-react';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
 import Notes from './pages/Notes';
 import NoteDetail from './pages/NoteDetail';
 import Contact from './pages/Contact';
+import LanguageSelector from './components/LanguageSelector';
 import './App.css';
 
 function App() {
@@ -23,15 +24,18 @@ function App() {
       <div className={`app-container ${isSidebarOpen ? 'sidebar-open' : ''}`}>
         <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
         
-        {/* Mobile Menu Button */}
         <button 
-          className="md:hidden fixed top-4 left-4 z-50 p-2 rounded-full bg-accent text-background-dark shadow-lg"
+          className="md:hidden fixed top-4 right-4 z-50 p-2 bg-accent text-background-dark shadow-lg border-2 border-accent-gold"
           onClick={toggleSidebar}
+          aria-label="Abrir Menu de Navegação"
         >
           <Menu size={24} />
         </button>
 
-        {/* Overlay for mobile sidebar */}
+        <div className="md:hidden fixed top-4 left-4 z-50">
+          <LanguageSelector isFloating={true} />
+        </div>
+
         {isSidebarOpen && (
           <div className="overlay active" onClick={toggleSidebar}></div>
         )}
